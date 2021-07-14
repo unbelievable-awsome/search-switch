@@ -12,7 +12,8 @@
   },
   "permissions": [
     "tabs", 
-    "*://www.baidu.com/*"
+    "*://www.baidu.com/*",
+    "*://www.google.com.hk/*"
   ],
   "background": {
     "scripts": [
@@ -21,7 +22,9 @@
   },
   "content_scripts": [{
     "matches": [
-      "*://www.baidu.com/*"
+      "*://*.baidu.com/*",
+      "*://*.google.com/*",
+      "*://www.google.com.hk/*"
     ],
     "js":["jquery-2.0.0.min.js", "content_script.js"]
   }]
