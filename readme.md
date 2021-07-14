@@ -10,4 +10,4 @@
 [![WeYe4e.png](https://z3.ax1x.com/2021/07/14/WeYe4e.png)](https://imgtu.com/i/WeYe4e)
 
 ### 安装方式
-将src文件下载后压缩，添加到 chrome 插件
+将文件下载后，添加 src 文件夹添加到 chrome 插件
