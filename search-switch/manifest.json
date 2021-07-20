@@ -1,5 +1,5 @@
 {
-  "name": "搜素跳转",
+  "name": "搜索跳转",
   "version": "1.0",
   "description": "换个方式搜索试试",
   "manifest_version": 2,
@@ -11,7 +11,6 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs", 
     "*://www.baidu.com/*",
     "*://www.google.com.hk/*"
   ],

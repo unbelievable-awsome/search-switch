@@ -54,13 +54,16 @@ const handleBaidu2Google = () => {
 
     googleBtn.addEventListener("click", function () {
         const keyword = document.getElementById("kw").value;
-        console.log(`keyword`, keyword)
-        chrome.runtime.sendMessage(
-            {
-                info: keyword,
-                open: 'google',
-            },
+        console.log(`keyword`, keyword);
+        window.open(
+            `https://www.google.com.hk/search?safe=strict&q=${keyword}`
         );
+        // chrome.runtime.sendMessage(
+        //     {
+        //         info: keyword,
+        //         open: 'google',
+        //     },
+        // );
     });
 
     googleBtn.append("Google It");
@@ -97,18 +100,18 @@ const handleGoogle2Baidu = () => {
         // 搜索结果页
         googleSearchBtn = $(".Tg7LZd");
         baiduBtn = document.createElement("div");
-        baiduBtn.style.width = '22px';
-        baiduBtn.style.height = '44px';
-        baiduBtn.style.paddingRight = '15px';
-        baiduBtn.style.display = 'flex';
-        baiduBtn.style.justifyContent = 'center';
-        baiduBtn.style.alignItems = 'center';
-        baiduBtn.style.cursor = 'pointer';
+        baiduBtn.style.width = "22px";
+        baiduBtn.style.height = "44px";
+        baiduBtn.style.paddingRight = "15px";
+        baiduBtn.style.display = "flex";
+        baiduBtn.style.justifyContent = "center";
+        baiduBtn.style.alignItems = "center";
+        baiduBtn.style.cursor = "pointer";
 
         const baiduBtnImg = document.createElement("img");
-        baiduBtnImg.src = 'https://z3.ax1x.com/2021/07/14/We3wTg.png';
-        baiduBtnImg.style.width = '100%';
-        baiduBtnImg.style.height = '50%';
+        baiduBtnImg.src = "https://z3.ax1x.com/2021/07/14/We3wTg.png";
+        baiduBtnImg.style.width = "100%";
+        baiduBtnImg.style.height = "50%";
 
         baiduBtn.append(baiduBtnImg);
     } else {
@@ -116,51 +119,50 @@ const handleGoogle2Baidu = () => {
         googleSearchBtn = $(".gNO89b");
         baiduBtn = document.createElement("div");
         baiduBtn.append("百度一下");
-        baiduBtn.style.display = 'inline-block';
-        baiduBtn.style.height = '36px';
-        baiduBtn.style.minWidth = '54px';
-        baiduBtn.style.boxSizing = 'border-box';
-        baiduBtn.style.borderRadius = '4px';
-        baiduBtn.style.userSelect = 'none';
-        baiduBtn.style.backgroundColor = '#f8f9fa';
-        baiduBtn.style.border = '1px solid #f8f9fa';
-        baiduBtn.style.fontSize = '14px';
-        baiduBtn.style.margin = '11px 4px';
-        baiduBtn.style.padding = '0 16px';
-        baiduBtn.style.lineHeight = '36px';
-        baiduBtn.style.cursor = 'pointer';
-        $(baiduBtn).on('mouseover', function(){
-            $(this).css('boxShadow', '0 1px 1px rgb(0 0 0 / 10%)');
-            $(this).css('border', '1px solid #dadce0');
-        })
-        $(baiduBtn).on('mouseleave', function(){
-            $(this).css('boxShadow', 'none');
-            $(this).css('border', '1px solid #f8f9fa');
-        })
+        baiduBtn.style.display = "inline-block";
+        baiduBtn.style.height = "36px";
+        baiduBtn.style.minWidth = "54px";
+        baiduBtn.style.boxSizing = "border-box";
+        baiduBtn.style.borderRadius = "4px";
+        baiduBtn.style.userSelect = "none";
+        baiduBtn.style.backgroundColor = "#f8f9fa";
+        baiduBtn.style.border = "1px solid #f8f9fa";
+        baiduBtn.style.fontSize = "14px";
+        baiduBtn.style.margin = "11px 4px";
+        baiduBtn.style.padding = "0 16px";
+        baiduBtn.style.lineHeight = "36px";
+        baiduBtn.style.cursor = "pointer";
+        $(baiduBtn).on("mouseover", function () {
+            $(this).css("boxShadow", "0 1px 1px rgb(0 0 0 / 10%)");
+            $(this).css("border", "1px solid #dadce0");
+        });
+        $(baiduBtn).on("mouseleave", function () {
+            $(this).css("boxShadow", "none");
+            $(this).css("border", "1px solid #f8f9fa");
+        });
     }
 
     if (!googleSearchBtn || !googleSearchBtn.length) {
         return;
     }
     $(baiduBtn).on("click", "", () => {
-        const searchInputBoxArr = $('.gLFyf');
-        console.log(`searchInputBoxArr`, searchInputBoxArr)
+        const searchInputBoxArr = $(".gLFyf");
+        console.log(`searchInputBoxArr`, searchInputBoxArr);
         if (!searchInputBoxArr || !searchInputBoxArr.length) {
             return;
         }
         const searchInputBox = searchInputBoxArr[0];
-        console.log(`searchInputBox`, searchInputBox)
+        console.log(`searchInputBox`, searchInputBox);
         if (!searchInputBox) {
             return;
         }
-        const keyword = searchInputBox.value || '';
+        const keyword = searchInputBox.value || "";
         console.log(`baidu click keyword`, keyword);
-        chrome.runtime.sendMessage(
-            {
-                info: keyword,
-                open: 'baidu',
-            },
-        );
+        // chrome.runtime.sendMessage({
+        //     info: keyword,
+        //     open: "baidu",
+        // });
+        window.open(`https://www.baidu.com/s?wd=${keyword}`);
         return;
     });
     $.each(googleSearchBtn, (index, btn) => {
