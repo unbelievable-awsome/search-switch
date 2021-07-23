@@ -10,7 +10,7 @@ const handleBaidu2Google = () => {
         baiduSearchBtn.parentNode.style.position = "relative";
         baiduSearchBtn.style.borderRadius = "0";
         baiduSearchBtn.style.height = "40px";
-        baiduSearchBtn.style.lingHeight = "40px";
+        baiduSearchBtn.style.lineHeight = "40px";
     }
 
     const googleBtn = document.createElement("div");
