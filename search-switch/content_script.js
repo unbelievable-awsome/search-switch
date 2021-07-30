@@ -146,7 +146,7 @@ const handleGoogle2Baidu = () => {
         return;
     }
     $(baiduBtn).on("click", "", () => {
-        const searchInputBoxArr = $(".gLFyf");
+        const searchInputBoxArr = $("input.gLFyf");
         console.log(`searchInputBoxArr`, searchInputBoxArr);
         if (!searchInputBoxArr || !searchInputBoxArr.length) {
             return;
