@@ -100,8 +100,7 @@ const handleGoogle2Baidu = () => {
         // 搜索结果页
         googleSearchBtn = $(".Tg7LZd");
         baiduBtn = document.createElement("div");
-        baiduBtn.style.width = "22px";
-        baiduBtn.style.height = "44px";
+        baiduBtn.style.height = "100%";
         baiduBtn.style.paddingRight = "15px";
         baiduBtn.style.display = "flex";
         baiduBtn.style.justifyContent = "center";
@@ -110,7 +109,6 @@ const handleGoogle2Baidu = () => {
 
         const baiduBtnImg = document.createElement("img");
         baiduBtnImg.src = "https://z3.ax1x.com/2021/07/14/We3wTg.png";
-        baiduBtnImg.style.width = "100%";
         baiduBtnImg.style.height = "50%";
 
         baiduBtn.append(baiduBtnImg);
