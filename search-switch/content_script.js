@@ -3,54 +3,84 @@
 
 const currentSiteLocation = document.location.href;
 
-/** 在百度搜索页增加谷歌搜索按钮 */
-const handleBaidu2Google = () => {
-    const baiduSearchBtn = document.getElementById("su");
-    if (baiduSearchBtn) {
-        baiduSearchBtn.parentNode.style.position = "relative";
-        baiduSearchBtn.style.borderRadius = "0";
-        baiduSearchBtn.style.height = "40px";
-        baiduSearchBtn.style.lineHeight = "40px";
+// 观察器的配置（需要观察什么变动）
+const config = {
+    attributes: true,
+    attributeFilter: ["class"],
+    childList: false,
+};
+// 当观察到变动时执行的回调函数
+const callback = function (mutationsList, observer) {
+    // Use traditional 'for loops' for IE 11
+    console.log(`observer:: mutationsList`, mutationsList);
+    for (let mutation of mutationsList) {
+        if (mutation.type !== "attributes") {
+            return;
+        }
+        // console.log(
+        //     "observer:: The " +
+        //         mutation.attributeName +
+        //         " attribute was modified."
+        // );
+        const googleBtnInBaiduPage = document.getElementById("search_switch_google_btn");
+        if (!googleBtnInBaiduPage) {
+            return;
+        }
+        googleBtnInBaiduPage.style.height = '40px';
     }
+};
+
+// 创建一个观察器实例并传入回调函数
+const observer = new MutationObserver(callback);
+
+const startObserver = (targetNode) => {
+    // 以上述配置开始观察目标节点
+    observer.observe(targetNode, config);
+};
+
+const stopObserver = () => {
+    // 停止观察
+    observer.disconnect();
+};
+
+/** 在百度搜索页增加谷歌搜索按钮 */
+const addGoogleBtnToBaiduPage = () => {
+    const baiduSearchBtn = document.getElementById("su");
+    const wrapperElement = document.getElementById("wrapper");
+
+    if (!baiduSearchBtn) {
+        return;
+    }
+
+    // 开始观察
+    startObserver(wrapperElement);
+
+    baiduSearchBtn.parentNode.style.position = "relative";
 
     const googleBtn = document.createElement("div");
-    if (googleBtn) {
-        googleBtn.style.width = "112px";
-        googleBtn.style.height = "36px";
-        googleBtn.style.position = "absolute";
-        googleBtn.style.border = "2px solid rgb(199 56 47)";
-        googleBtn.style.borderRadius = "0";
-        googleBtn.style.backgroundImage =
-            "-webkit-linear-gradient(45deg, #4285f4, #ea4335, #fbbc05, #34a853)";
-        // googleBtn.style.borderImage = '-webkit-linear-gradient(#4285f4, #ea4335, #fbbc05, #34a853) 20 20';
-        googleBtn.style["-webkit-background-clip"] = "text";
-        googleBtn.style["-webkit-text-fill-color"] = "transparent";
-        // googleBtn.style.backgroundImage = "conic-gradient(#4285f4, #ea4335, #ea4335, #fbbc05, #34a853, #34a853, #4285f4)";
-        googleBtn.style.top = "0";
-        googleBtn.style.left = "114px";
-        googleBtn.style["font-size"] = "17px";
-        googleBtn.style["font-weight"] = "400";
-        googleBtn.style.display = "flex";
-        googleBtn.style["justify-content"] = "center";
-        googleBtn.style["align-items"] = "center";
-        googleBtn.style["text-align"] = "center";
-        googleBtn.style.cursor = "pointer";
-    }
 
-    const bd1 = document.querySelector(".s_ipt_wr");
-    if (bd1) {
-        bd1.style.borderRadius = "0";
-    }
-
-    const baiduSearchInput = document.getElementById("kw");
-    if (baiduSearchInput) {
-        baiduSearchInput.style.borderRadius = "0";
-        baiduSearchInput.style.padding = "10px 16px";
-    }
-
-    // const form = document.getElementById('form');
-    // baiduSearchBtn.style.position = "relative";
-    // baiduSearchBtn.style.left = "-60px";
+    googleBtn.id = "search_switch_google_btn";
+    googleBtn.style.width = "112px";
+    googleBtn.style.height = '44px';
+    googleBtn.style.position = "absolute";
+    googleBtn.style.border = "2px solid rgb(199 56 47)";
+    googleBtn.style.borderRadius = "10px";
+    googleBtn.style.backgroundImage =
+        "-webkit-linear-gradient(45deg, #4285f4, #ea4335, #fbbc05, #34a853)";
+    // googleBtn.style.borderImage = '-webkit-linear-gradient(#4285f4, #ea4335, #fbbc05, #34a853) 20 20';
+    googleBtn.style["-webkit-background-clip"] = "text";
+    googleBtn.style["-webkit-text-fill-color"] = "transparent";
+    // googleBtn.style.backgroundImage = "conic-gradient(#4285f4, #ea4335, #ea4335, #fbbc05, #34a853, #34a853, #4285f4)";
+    googleBtn.style.top = "0";
+    googleBtn.style.left = "120px";
+    googleBtn.style["font-size"] = "17px";
+    googleBtn.style["font-weight"] = "400";
+    googleBtn.style.display = "flex";
+    googleBtn.style["justify-content"] = "center";
+    googleBtn.style["align-items"] = "center";
+    googleBtn.style["text-align"] = "center";
+    googleBtn.style.cursor = "pointer";
+    googleBtn.style.boxSizing = "border-box";
 
     googleBtn.addEventListener("click", function () {
         const keyword = document.getElementById("kw").value;
@@ -92,7 +122,7 @@ const handleBaidu2Google = () => {
 };
 
 /** 在谷歌搜索页增加百度搜索按钮 */
-const handleGoogle2Baidu = () => {
+const addBaiduBtnToGooglePage = () => {
     let baiduBtn = null;
     let googleSearchBtn = null;
 
@@ -176,8 +206,8 @@ console.log(`currentSiteLocation`, currentSiteLocation);
 
 if (/google.com/.test(currentSiteLocation)) {
     // console.log("谷歌~~~~~~~");
-    handleGoogle2Baidu();
+    addBaiduBtnToGooglePage();
 } else if (/baidu.com/.test(currentSiteLocation)) {
     // console.log("百度~~~~~~~");
-    handleBaidu2Google();
+    addGoogleBtnToBaiduPage();
 }
