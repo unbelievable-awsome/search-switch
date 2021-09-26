@@ -17,6 +17,7 @@ const callback = function (mutationsList, observer) {
         if (mutation.type !== "attributes") {
             return;
         }
+
         // console.log(
         //     "observer:: The " +
         //         mutation.attributeName +
