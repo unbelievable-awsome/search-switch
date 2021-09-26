@@ -1,6 +1,6 @@
 {
   "name": "搜索跳转",
-  "version": "1.2",
+  "version": "1.4",
   "description": "在一个搜索引擎中找不到满意的结果时，一键跳转到另一个搜索引擎，直接展示当前关键词的搜索结果。",
   "manifest_version": 2,
   "icons": {

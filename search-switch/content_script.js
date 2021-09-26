@@ -22,11 +22,13 @@ const callback = function (mutationsList, observer) {
         //         mutation.attributeName +
         //         " attribute was modified."
         // );
-        const googleBtnInBaiduPage = document.getElementById("search_switch_google_btn");
+        const googleBtnInBaiduPage = document.getElementById(
+            "search_switch_google_btn"
+        );
         if (!googleBtnInBaiduPage) {
             return;
         }
-        googleBtnInBaiduPage.style.height = '40px';
+        googleBtnInBaiduPage.style.height = "40px";
     }
 };
 
@@ -45,6 +47,10 @@ const stopObserver = () => {
 
 /** 在百度搜索页增加谷歌搜索按钮 */
 const addGoogleBtnToBaiduPage = () => {
+    const element = document.getElementById("search_switch_google_btn");
+    if (element) {
+        return;
+    }
     const baiduSearchBtn = document.getElementById("su");
     const wrapperElement = document.getElementById("wrapper");
 
@@ -61,7 +67,6 @@ const addGoogleBtnToBaiduPage = () => {
 
     googleBtn.id = "search_switch_google_btn";
     googleBtn.style.width = "112px";
-    googleBtn.style.height = '44px';
     googleBtn.style.position = "absolute";
     googleBtn.style.border = "2px solid rgb(199 56 47)";
     googleBtn.style.borderRadius = "10px";
@@ -81,6 +86,12 @@ const addGoogleBtnToBaiduPage = () => {
     googleBtn.style["text-align"] = "center";
     googleBtn.style.cursor = "pointer";
     googleBtn.style.boxSizing = "border-box";
+
+    if (currentSiteLocation.includes("/s?")) {
+        googleBtn.style.height = "40px";
+    } else {
+        googleBtn.style.height = "44px";
+    }
 
     googleBtn.addEventListener("click", function () {
         const keyword = document.getElementById("kw").value;
@@ -201,8 +212,6 @@ const addBaiduBtnToGooglePage = () => {
         }
     });
 };
-
-console.log(`currentSiteLocation`, currentSiteLocation);
 
 if (/google.com/.test(currentSiteLocation)) {
     // console.log("谷歌~~~~~~~");
