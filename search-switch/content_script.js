@@ -68,6 +68,7 @@ const addGoogleBtnToBaiduPage = () => {
 
     googleBtn.id = "search_switch_google_btn";
     googleBtn.style.width = "112px";
+    googleBtn.style.height = "40px";
     googleBtn.style.position = "absolute";
     googleBtn.style.border = "2px solid rgb(199 56 47)";
     googleBtn.style.borderRadius = "10px";
@@ -88,9 +89,8 @@ const addGoogleBtnToBaiduPage = () => {
     googleBtn.style.cursor = "pointer";
     googleBtn.style.boxSizing = "border-box";
 
-    if (currentSiteLocation.includes("/s?")) {
-        googleBtn.style.height = "40px";
-    } else {
+    if (!currentSiteLocation.includes("/s?")) {
+        console.log("not include");
         googleBtn.style.height = "44px";
     }
 
