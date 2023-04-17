@@ -142,7 +142,7 @@ const addBaiduBtnToGooglePage = () => {
         // 搜索结果页
         googleSearchBtn = $(".Tg7LZd");
         baiduBtn = document.createElement("div");
-        baiduBtn.style.height = "100%";
+        baiduBtn.style.height = "44px";
         baiduBtn.style.paddingRight = "15px";
         baiduBtn.style.display = "flex";
         baiduBtn.style.justifyContent = "center";

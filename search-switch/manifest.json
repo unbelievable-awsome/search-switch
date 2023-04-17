@@ -1,8 +1,8 @@
 {
   "name": "搜索跳转",
-  "version": "1.5",
+  "version": "1.6",
   "description": "在一个搜索引擎中找不到满意的结果时，一键跳转到另一个搜索引擎，直接展示当前关键词的搜索结果。",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "icons": {
     "128": "search-switch-128.png"
   },
@@ -17,17 +17,17 @@
     "*://www.google.com/*"
   ],
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
-  "content_scripts": [{
-    "matches": [
-      "*://*.baidu.com/*",
-      "*://*.google.com.tw/*",
-      "*://*.google.com.hk/*",
-      "*://*.google.com/*"
-    ],
-    "js":["jquery-2.0.0.min.js", "content_script.js"]
-  }]
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.baidu.com/*",
+        "*://*.google.com.tw/*",
+        "*://*.google.com.hk/*",
+        "*://*.google.com/*"
+      ],
+      "js": ["jquery-2.0.0.min.js", "content_script.js"]
+    }
+  ]
 }
