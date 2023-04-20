@@ -186,7 +186,8 @@ const addBaiduBtnToGooglePage = () => {
         return;
     }
     $(baiduBtn).on("click", "", () => {
-        const searchInputBoxArr = $("input.gLFyf");
+        console.log("debug:: click baiduBtn");
+        const searchInputBoxArr = $("textarea.gLFyf");
         console.log(`searchInputBoxArr`, searchInputBoxArr);
         if (!searchInputBoxArr || !searchInputBoxArr.length) {
             return;
