@@ -10,40 +10,78 @@ const config = {
     childList: false,
 };
 // 当观察到变动时执行的回调函数
-const callback = function (mutationsList, observer) {
+const googleBtnInBaiduPageCallback = function (
+    mutationsList,
+    googleBtnInBaiduPageObserver
+) {
     // Use traditional 'for loops' for IE 11
-    console.log(`observer:: mutationsList`, mutationsList);
+    console.log(`googleBtnInBaiduPageObserver:: mutationsList`, mutationsList);
     for (let mutation of mutationsList) {
         if (mutation.type !== "attributes") {
             return;
         }
-
-        // console.log(
-        //     "observer:: The " +
-        //         mutation.attributeName +
-        //         " attribute was modified."
+        // const googleBtnInBaiduPage = document.getElementById(
+        //     "search_switch_google_btn"
         // );
-        const googleBtnInBaiduPage = document.getElementById(
-            "search_switch_google_btn"
-        );
-        if (!googleBtnInBaiduPage) {
-            return;
-        }
-        googleBtnInBaiduPage.style.height = "40px";
+        // if (!googleBtnInBaiduPage) {
+        //     return;
+        // }
+        const baiduBtnHeight = $(mutation.target).height();
+        console.log("baiduBtnHeight", baiduBtnHeight);
+        // if (className.includes("s_down")) {
+        //     googleBtnInBaiduPage.style.height = "40px";
+        // } else {
+        //     googleBtnInBaiduPage.style.height = "44px";
+        // }
     }
 };
 
 // 创建一个观察器实例并传入回调函数
-const observer = new MutationObserver(callback);
+const googleBtnInBaiduPageObserver = new MutationObserver(
+    googleBtnInBaiduPageCallback
+);
 
-const startObserver = (targetNode) => {
+const startGoogleBtnInBaiduPageObserver = (targetNode) => {
     // 以上述配置开始观察目标节点
-    observer.observe(targetNode, config);
+    googleBtnInBaiduPageObserver.observe(targetNode, config);
 };
 
-const stopObserver = () => {
+const stopGoogleBtnInBaiduPageObserver = () => {
     // 停止观察
-    observer.disconnect();
+    googleBtnInBaiduPageObserver.disconnect();
+};
+
+const baiduBtnInGooglePageCallback = function (mutationsList) {
+    // Use traditional 'for loops' for IE 11
+    for (let mutation of mutationsList) {
+        if (mutation.type !== "attributes") {
+            return;
+        }
+        const className = $(mutation.target).attr("class");
+        const baiduBtnInGooglePage = document.getElementById(
+            "baiduBtnInGooglePage"
+        );
+        if (!baiduBtnInGooglePage) {
+            return;
+        }
+        console.log("baiduBtnInGooglePage", baiduBtnInGooglePage);
+        if (className && className.includes("minidiv")) {
+            try {
+                baiduBtnInGooglePage.style.height = "32px";
+            } catch (e) {}
+        } else {
+            try {
+                baiduBtnInGooglePage.style.height = "44px";
+            } catch (e) {}
+        }
+    }
+};
+const baiduBtnInGooglePageObserver = new MutationObserver(
+    baiduBtnInGooglePageCallback
+);
+const startBaiduBtnInGooglePageObserver = (targetNode) => {
+    // 以上述配置开始观察目标节点
+    baiduBtnInGooglePageObserver.observe(targetNode, config);
 };
 
 /** 在百度搜索页增加谷歌搜索按钮 */
@@ -53,14 +91,14 @@ const addGoogleBtnToBaiduPage = () => {
         return;
     }
     const baiduSearchBtn = document.getElementById("su");
-    const wrapperElement = document.getElementById("wrapper");
+    const wrapperElement = document.getElementById("head");
 
     if (!baiduSearchBtn) {
         return;
     }
 
     // 开始观察
-    startObserver(wrapperElement);
+    startGoogleBtnInBaiduPageObserver(baiduSearchBtn);
 
     baiduSearchBtn.parentNode.style.position = "relative";
 
@@ -135,13 +173,14 @@ const addGoogleBtnToBaiduPage = () => {
 
 /** 在谷歌搜索页增加百度搜索按钮 */
 const addBaiduBtnToGooglePage = () => {
-    let baiduBtn = null;
+    let baiduBtn = document.createElement("div");
+    baiduBtn.id = "baiduBtnInGooglePage";
     let googleSearchBtn = null;
+    const searchFormElement = document.getElementById("searchform");
 
     if (currentSiteLocation.includes("/search")) {
         // 搜索结果页
         googleSearchBtn = $(".Tg7LZd");
-        baiduBtn = document.createElement("div");
         baiduBtn.style.height = "44px";
         baiduBtn.style.paddingRight = "15px";
         baiduBtn.style.display = "flex";
@@ -157,7 +196,6 @@ const addBaiduBtnToGooglePage = () => {
     } else {
         //  搜索初始页
         googleSearchBtn = $(".gNO89b");
-        baiduBtn = document.createElement("div");
         baiduBtn.append("百度一下");
         baiduBtn.style.display = "inline-block";
         baiduBtn.style.height = "36px";
@@ -213,6 +251,7 @@ const addBaiduBtnToGooglePage = () => {
             console.log("btn no parentNode", btn);
         }
     });
+    startBaiduBtnInGooglePageObserver(searchFormElement);
 };
 
 if (/google.com/.test(currentSiteLocation)) {
